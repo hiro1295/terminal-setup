@@ -1,0 +1,99 @@
+format = """
+[](fg:#a3250b)\
+$os\
+$username\
+$hostname\
+[ ](fg:#a3250b bg:#7aa2f7)\
+$directory\
+[ ](fg:#7aa2f7 bg:#9ece6a)\
+$git_branch\
+$git_status\
+$git_metrics\
+[](fg:#9ece6a)\
+$fill\
+[](fg:#e0af68)\
+$cmd_duration\
+[](fg:#73daca bg:#e0af68)\
+$time\
+[](fg:#73daca)
+\n$character\
+"""
+
+[os]
+format = "[$symbol]($style)"
+style = 'fg:#f7dad5 bg:#a3250b'
+disabled = false
+[os.symbols]
+Macos = " " #リンゴのicon
+Ubuntu = " " #Ubuntuのicon
+Windows = " "
+
+[username]
+show_always = true
+style_user = 'fg:#f7dad5 bg:#a3250b'
+format = "[$user]($style)"
+disabled = false
+
+[hostname]
+ssh_only = false
+ssh_symbol = ''
+style = 'fg:#f7dad5 bg:#a3250b'
+format = "[@$ssh_symbol$hostname]($style)"
+disabled = false
+
+[directory]
+truncation_length = 2
+truncate_to_repo = false
+fish_style_pwd_dir_length = 2
+home_symbol = ' ~' # nf-costum-home
+style = 'fg:#1a1b26 bg:#7aa2f7'
+read_only = ' 󰌾 ' # nf-md-lock
+read_only_style = 'fg:#f7768e '
+format = '[$path]($style)[$read_only]($read_only_style)'
+
+[git_branch]
+symbol = ' ' # nf-fa-github_alt, nf-fa-code_fork
+truncation_length = 4
+truncation_symbol = ''
+style = 'fg:#1a1b26 bg:#9ece6a '
+format = '[$symbol$branch(:$remote_branch)]($style)' # nf-pl-left_soft_divider
+
+[git_status]
+style = 'fg:#1a1b26 bg:#9ece6a '
+conflicted = ' 󱈸'
+ahead = '  ${count}'
+behind = '  ${count}'
+diverged = ' 󰦻 '
+up_to_date = '  '
+untracked = ' 󰡯 ${count}'
+stashed = '  '
+modified = '  ${count}'
+renamed = ' 󰑕 ${count}'
+deleted = '  ${count}'
+format = '([$all_status$ahead_behind]($style))'
+
+[git_metrics]
+added_style = 'fg:#1a1b26 bg:#9ece6a '
+deleted_style = 'fg:#1a1b26 bg:#9ece6a '
+format = '[ +$added/-$deleted]($deleted_style)'
+disabled = false
+
+[fill]
+symbol = '─'
+style = 'fg:#8cbdc2 '
+
+[character]
+success_symbol = '[ 󰅁](bold #9ece6a)'
+error_symbol = '[ 󰅁](bold red)'
+
+[cmd_duration]
+min_time = 1
+style = 'fg:#1a1b26 bg:#e0af68'
+format = "[  $duration ]($style)" # nf-pl-right_soft_divider, nf-mdi-clock
+
+[time]
+disabled = false
+style = 'fg:#1a1b26 bg:#73daca '
+format = '[  $time ]($style)' # nf-pl-right_soft_divider, nf-fa-clock_o
+time_format = '%R'
+utc_time_offset = '+9'
